@@ -1,6 +1,6 @@
 ---
 name: Izify RAG com ADK
-overview: "Construir do zero, em /Users/ricardosantos/workspace/ia/python, o projeto Izify RAG em 5 fases incrementais: ingestão em Python com pgvector, agente Google ADK com tracing no Phoenix, Query Planner + busca híbrida + reranking, avaliação com RAGAS e hardening OWASP com multi-tenant, terminando com o deploy no GCP (Cloud Run + Cloud SQL + Vertex AI)."
+overview: "Construir do zero, em /Users/ricardosantos/workspace/ia/python/app, o projeto Izify RAG em 5 fases incrementais: ingestão em Python com pgvector, agente Google ADK com tracing no Phoenix, Query Planner + busca híbrida + reranking, avaliação com RAGAS e hardening OWASP com multi-tenant, terminando com o deploy no GCP (Cloud Run + Cloud SQL + Vertex AI)."
 todos:
   - id: f1-setup
     content: "Fase 1: instalar uv, inicializar o projeto, criar o docker-compose (pgvector + Phoenix), config.py e .env.example"
@@ -43,6 +43,8 @@ isProject: false
 
 # Projeto Izify RAG: Python + Google ADK + pgvector + RAGAS + OWASP
 
+O código mora em `app/src/izify`. O calendário e o corte de dezembro estão em `openspec/changes/hub-estudo-izify/`. As cinco fases abaixo continuam valendo por dentro de `app/`.
+
 ## Ponto de partida e decisões
 
 - O workspace está vazio. Só existe o `[.env](.env)`, que tem `GEMINI_API_KEY`. O Python 3.13 e o Docker estão instalados, mas faltam o `uv` e o `gcloud`.
@@ -83,8 +85,8 @@ flowchart LR
 ## Estrutura do repositório
 
 ```
-pyproject.toml / uv.lock / docker-compose.yml / .env.example / alembic/
-src/izify/
+app/pyproject.toml / app/uv.lock / app/docker-compose.yml / app/.env.example / app/alembic/
+app/src/izify/
   config.py                 # pydantic-settings (lê o .env)
   db/        engine.py, models.py, tenant.py (SET LOCAL app.tenant_id)
   ingestion/ loaders.py, chunker.py, embedder.py, pipeline.py, cli.py
@@ -93,10 +95,10 @@ src/izify/
   guardrails/ injection.py, pii.py, output.py
   observability/ tracing.py
   api/       main.py, schemas.py
-data/docs/{tenant_slug}/*.md   # manuais, SLA, troubleshooting, FAQ fictícios do Izify
-evals/     golden_dataset_izify.json, run_ragas.py
-tests/     unit/, integration/, security/
-.github/workflows/ci.yml
+app/data/docs/{tenant_slug}/*.md   # manuais, SLA, troubleshooting, FAQ fictícios do Izify
+app/evals/     golden_dataset_izify.json, run_ragas.py
+app/tests/     unit/, integration/, security/
+app/.github/workflows/ci.yml
 ```
 
 ## Fase 1: fundação de dados e ingestão vetorial

@@ -6,3 +6,7 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Clones dos forks do MBA. Cada um tem o próprio git.
+mba/ingestao-busca/
+mba/pull-evaluation-prompt/

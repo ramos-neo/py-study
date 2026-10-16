@@ -1,0 +1,14 @@
+# Esqueleto local. Papéis do banco e script de init entram na change de ingestão.
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: izify
+      POSTGRES_PASSWORD: izify
+      POSTGRES_DB: izify
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    ports:
+      - "6006:6006"

@@ -1,0 +1,5 @@
+[project]
+name = "izify"
+version = "0.0.0"
+description = "Produto Izify. A implementação começa na change da Fase 1."
+requires-python = ">=3.11"
